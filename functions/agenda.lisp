@@ -34,3 +34,24 @@
         )
     )
 )
+
+(defun calendario-eventos (&optional &key ano)
+    (if (null ano)
+        (format t "Erro: Ano necessário!~%")
+
+        (loop for m from 1 to 12 do
+            (if (contem-evento ano m nil)
+                (progn
+                    (format t "~c[94m~d-\"~a\" ~c[0m~%" #\ESC m (nome-mes m) #\ESC)
+                    (loop for d from 1 to 30 do
+                        (if (contem-evento ano m d)
+                            (format t "~c[94m*~d*~c[0m " #\ESC d #\ESC)
+                            (format t "~d " d)
+                        )
+                    )
+                    (terpri)
+                )
+            )
+        )
+    )
+)
