@@ -15,16 +15,22 @@
         (format t "Erro: Ano necessário!~%")
 
         (loop for m in (filtra (nome-mes-para-numero mes) 12) do
-            (format t "Mês ~a (~d)~%" (nome-mes m) m)
+            (if (contem-evento ano m nil)
+                (format t "~c[94m~d-\"~a\" ~c[0m~%" #\ESC m (nome-mes m) #\ESC)
+                (format t "~d-\"~a\"~%" m (nome-mes m))
+            )
 
-            ;; TODO: validar se data tem evento
             (loop for d in (filtra dia 30) do
                 (if (contem-evento ano m d)
-                    (format t " *~d*" d)
-                    (format t " ~d" d)
+                    (format t "~c[94m*~d*~c[0m " #\ESC d #\ESC)
+                    (format t "~d " d)
                 )
             )
-            (terpri) ;;(print("\n"))
+            ; (when (contem-evento ano m nil)
+            ;     (format t "~%~c[94m* Eventos do mês ~s: ~c~%[0m" #\ESC (nome-mes m) #\ESC)
+            ;     (mostra-eventos :ano ano :mes m)
+            ; )
+            (terpri)
         )
     )
 )
