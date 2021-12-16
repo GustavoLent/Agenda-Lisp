@@ -92,7 +92,6 @@
     (format t "Evento: ~s~%" nome)
     (format t "Início: ~s~%" (apply #'texto-data (car (cdr inicio))))
     (format t "Fim:    ~s~%" (apply #'texto-data (car (cdr fim))))
-    (format t "**~%")
     (terpri)
 )
 

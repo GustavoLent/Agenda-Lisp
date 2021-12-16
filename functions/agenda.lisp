@@ -10,7 +10,7 @@
     )
 )
 
-(defun calendario (&optional &key ano mes-inicial mes-final mes-especifico dia hora)
+(defun calendario (&optional &key ano mes-inicial mes-final mes-especifico dia)
     (if (null ano)
         (format t "Erro: Ano necessário!~%")
 
@@ -20,6 +20,7 @@
             )
         
             (loop for m in meses do
+                (terpri)
                 (format t "~d - \"~a\"~%" m (nome-mes m))
 
                 (loop for d in (filtra dia 30) do
@@ -45,11 +46,12 @@
         (loop for m from 1 to 12 do
             (if (contem-evento ano m nil)
                 (progn
-                    (format t "~d-\"~a\"" m (nome-mes m))
+                    (terpri)
+                    (format t "~d - \"~a\"" m (nome-mes m))
+                    (terpri)
                     (loop for d from 1 to 30 do
                         (if (contem-evento ano m d)
                             (format t "*~d* " d)
-                            (format t   "~d " d)
                         )
                     )
                     (terpri)
