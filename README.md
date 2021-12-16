@@ -1,16 +1,14 @@
 # Agenda Lisp #
 
-> Projeto desenvolvido para a disciplina **Linguagens de Programação Não Convencionais**, ministrada pelo [Professor Dr. Thiago Gottardi](https://bv.fapesp.br/pt/pesquisador/104729/thiago-gottardi/), durante o sexto semestre da graduação em [Bacharelado em Ciências da Computação na Unesp de Rio Claro](https://igce.rc.unesp.br/#!/departamentos/demac/pagina-do-curso-de-bcc/home/).
+Projeto desenvolvido para a disciplina **Linguagens de Programação Não Convencionais**, ministrada pelo [Professor Dr. Thiago Gottardi](https://bv.fapesp.br/pt/pesquisador/104729/thiago-gottardi/), durante o sexto semestre da graduação em [Bacharelado em Ciências da Computação na Unesp de Rio Claro](https://igce.rc.unesp.br/#!/departamentos/demac/pagina-do-curso-de-bcc/home/).
 
 ## Alunos ##
-------------
 * [Bruna Félix](https://github.com/BrunaFelix)
-* [Gustavo Lima Lent](https://github.com/GustavoLent)
 * [Guilherme Henrique Jardim](https://github.com/ghjardim)
-* [José Fernandes Russino](https://www.linkedin.com/in/zefernandes0/)
+* [Gustavo Lima Lent](https://github.com/GustavoLent)
+* [José Fernandes Russino](https://github.com/z3fernandes)
 
 ## Inicialização do projeto: ##
--------------------------------
 * Inicialize o contâiner Docker com:
 ```docker
     docker run -d -t --name clisp Cl foundation/clisp
@@ -36,7 +34,6 @@
 ```
 
 ## Uso das funções: ##
-----------------------
 A agenda possui três funções principais: calendario, calendario-eventos e mostra-eventos.
 
 ### ( calendario :ano :mes-inicial :mes-final :mes-especifico :dia ) ###
@@ -127,7 +124,6 @@ A agenda possui três funções principais: calendario, calendario-eventos e mos
 * O parâmetro **ano** é obrigatório.
 
 ## Inclusão de novas informações: ##
-------------------------------------
 Para adicionar eventos na agenda acesse o arquivo ["eventos.lisp"](../agenda-lisp/functions/eventos.lisp) e adicione o seguinte exemplo na linha `";; adição de novos eventos"`:
 
 ``` lisp
