@@ -10,27 +10,30 @@
     )
 )
 
-(defun calendario (&optional &key ano mes dia hora)
+(defun calendario (&optional &key ano mes-inicial mes-final mes-especifico dia hora)
     (if (null ano)
         (format t "Erro: Ano necessário!~%")
 
-        (loop for m in (filtra (nome-mes-para-numero mes) 12) do
-            (if (contem-evento ano m nil)
-                (format t "~c[94m~d-\"~a\" ~c[0m~%" #\ESC m (nome-mes m) #\ESC)
-                (format t "~d-\"~a\"~%" m (nome-mes m))
+        (let
+            (
+                (meses      (parseia-meses mes-inicial mes-final mes-especifico)) 
             )
+        
+            (loop for m in meses do
+                (format t "~d - \"~a\"~%" m (nome-mes m))
 
-            (loop for d in (filtra dia 30) do
-                (if (contem-evento ano m d)
-                    (format t "~c[94m*~d*~c[0m " #\ESC d #\ESC)
-                    (format t "~d " d)
+                (loop for d in (filtra dia 30) do
+                    (if (contem-evento ano m d)
+                        (format t "*~d* " d)
+                        (format t   "~d " d)
+                    )
                 )
+                ; (when (contem-evento ano m nil)
+                ;     (format t "~%~c[94m* Eventos do mês ~s: ~c~%[0m" #\ESC (nome-mes m) #\ESC)
+                ;     (mostra-eventos :ano ano :mes m)
+                ; )
+                (terpri)
             )
-            ; (when (contem-evento ano m nil)
-            ;     (format t "~%~c[94m* Eventos do mês ~s: ~c~%[0m" #\ESC (nome-mes m) #\ESC)
-            ;     (mostra-eventos :ano ano :mes m)
-            ; )
-            (terpri)
         )
     )
 )
@@ -42,11 +45,11 @@
         (loop for m from 1 to 12 do
             (if (contem-evento ano m nil)
                 (progn
-                    (format t "~c[94m~d-\"~a\" ~c[0m~%" #\ESC m (nome-mes m) #\ESC)
+                    (format t "~d-\"~a\"" m (nome-mes m))
                     (loop for d from 1 to 30 do
                         (if (contem-evento ano m d)
-                            (format t "~c[94m*~d*~c[0m " #\ESC d #\ESC)
-                            (format t "~d " d)
+                            (format t "*~d* " d)
+                            (format t   "~d " d)
                         )
                     )
                     (terpri)

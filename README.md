@@ -34,3 +34,24 @@
     (calendario-eventos :ano 2021)
     (mostra-eventos :ano 2021)
 ```
+
+* Exemplo da função calendário:
+``` lisp
+    (calendario :ano 2021)
+        ;; Irá retornar todos os meses e dias daquele ano
+
+    (calendario :ano 2021 :mes-especifico 7)
+        ;; Irá retornar os dias para o mês específico
+
+    (calendario :ano 2021 :mes-inicial 7)
+        ;; Irá retornar os dias para os meses 7 a 12 (inclusivo)
+
+    (calendario :ano 2021 :mes-final 9)
+        ;; Irá retornar os dias para os meses 1 a 9 (inclusivo)
+
+    (calendario :ano 2021 :mes-inicial 7 :mes-final 9)
+        ;; Irá retornar os dias para os meses 7 a 9 (inclusivo)
+
+    (calendario :ano 2021 :mes-inicial 7 :mes-final 9 :mes-especifico 3)
+        ;; Irá retornar os dias para o mês específico, somente
+```

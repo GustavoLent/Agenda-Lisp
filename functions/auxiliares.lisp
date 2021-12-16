@@ -108,13 +108,14 @@
     (> (apply #'data-em-horas-inicio a) (apply #'data-em-horas-inicio b))
 )
 
-(defun envolve-evento (ano mes dia hora ev)
-    (defun substitui-nil (valor substituto)
-        (if (null valor)
-            substituto
-            valor
-        )
+(defun substitui-nil (valor substituto)
+    (if (null valor)
+        substituto
+        valor
     )
+)
+
+(defun envolve-evento (ano mes dia hora ev)
     (let (
             (comeco            (apply #'data-em-horas-inicio ev)) 
             (final             (apply #'data-em-horas-fim ev)) 
@@ -141,6 +142,26 @@
                 (return-from nome-mes-para-numero i)
             )
         )
+    )
+)
+
+(defun filtra-meses (mes-inicial mes-final)
+    (if (null mes-final)
+        (if (null mes-inicial)      ;; final é nulo
+            (return-from filtra-meses (loop for i from 1 to 12 collect i))     ;; final e inicial são nulos
+            (return-from filtra-meses (loop for i from (nome-mes-para-numero mes-inicial) to 12 collect i))        ;; inicial não é nulo
+        )
+        (if (null mes-inicial)      ;; final não é nulo
+            (return-from filtra-meses (loop for i from 1 to (nome-mes-para-numero mes-final) collect i))       ;; final não nulos e inicial nulo
+            (return-from filtra-meses (loop for i from (nome-mes-para-numero mes-inicial) to (nome-mes-para-numero mes-final) collect i))      ;; final e inicial são nulos
+        )
+    )
+)
+
+(defun parseia-meses (mes-inicial mes-final mes-especifico)
+    (if (null mes-especifico)
+        (return-from parseia-meses          (filtra-meses mes-inicial mes-final))
+        (return-from parseia-meses          (list (nome-mes-para-numero mes-especifico)))
     )
 )
 
